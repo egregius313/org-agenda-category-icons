@@ -1,6 +1,6 @@
 ;;; org-agenda-category-icons.el --- A configuration macro for defining your agenda icons  -*- lexical-binding: t; -*-
 
-;; Copyright (C) 2012-2017 John Wiegley
+;; Copyright (C) 2022 Edward Minnix
 
 ;; Author: Edward Minnix III <egregius313@gmail.com>
 ;; Maintainer: Edward Minnix III <egregius313@gmail.com>
