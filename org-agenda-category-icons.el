@@ -56,7 +56,7 @@
     (:fileicon . all-the-icons-fileicon)
     (:alltheicon . all-the-icons-alltheicon)
     (:wicon . all-the-icons-wicon)
-    (:emoji . egregius313/identity))
+    (:emoji . org-agenda-category-icons-identity))
   "Functions for defining agenda icons."
   :type '(alist :key-type keyword :value-type function))
 
