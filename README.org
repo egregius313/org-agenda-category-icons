@@ -1,0 +1,47 @@
+#+title: org-agenda-category-icons
+#+AUTHOR: Edward Minnix <egregius313@gmail.com>
+
+* ~org-agenda-category-icons~: a package for defining your icons
+
+One of the nicest features of ~org-agenda~ is the [[https://www.gnu.org/software/emacs/manual/html_node/org/Categories.html][~org-agenda-category-alist~
+variable]]. However, using fancier icons, like from [[https://github.com/domtronn/all-the-icons.el][All the Icons]], can be quite
+cumbersome. So this package provides a macro ~org-agenda-category-icons!~ to
+make this nicer.
+
+#+begin_src emacs-lisp
+(org-agenda-category-icons!
+ ;; Set the icon for the category "sleep" to the faicon "bed" icon from
+ ;; `all-the-icons'
+ :faicon
+ (bed sleep)
+
+ ;; Podcast => the radio-tower octicon icon
+ :octicon
+ (radio-tower Podcast)
+
+ :material
+ (local_car_wash "Car Wash") ;; multi-word categories should be in a string
+
+ ;; Use a bare emoji
+ :emoji
+ ("🏋" Workout workouts) ;; define multiple categories
+
+ :alltheicon
+ (rust "Rust Philly"))
+#+end_src
+
+* Using the macro
+
+The default icon sets are defined in the
+~org-agenda-category-icons-iconset-alist~ variable.
+
+By default the options include
+
+| Keyword       | Icon Set                    |
+|---------------+-----------------------------|
+| ~:faicon~     | Font Awesome Icons          |
+| ~:octicon~    | Github Octicons             |
+| ~:material~   | Material Icons              |
+| ~:wicon~      | Weather icons               |
+| ~:alltheicon~ | Other ~all-the-icons~ icons |
+| ~:emoji~      | Emoji                       |
