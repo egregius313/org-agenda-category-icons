@@ -43,7 +43,7 @@
 (defgroup org-agenda-category-icons
   '()
   "Declarative definition for `org-agenda-category-icon-alist'."
-  :group org-agenda)
+  :group 'org-agenda)
 
 (defun org-agenda-category-icons-identity (x)
   "Identity function. Return the value `X'."
