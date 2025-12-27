@@ -87,7 +87,7 @@
                                              category
                                            (concat (rx bos) category (rx eos))))
                       (entry (list category-selector (list icon) nil nil :ascent 'center)))
-                 `(add-to-list 'org-agenda-category-icon-alist ,entry))))
+                 `(add-to-list 'org-agenda-category-icon-alist ',entry))))
     `(progn
        ,@(cl-loop
           with icon-set
