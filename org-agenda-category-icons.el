@@ -63,22 +63,22 @@
 (defmacro org-agenda-category-icons! (&rest specs)
   "Define the agenda icons specified by `SPECS'."
   (cl-flet* ((to-string (x)
-              "Convert `X' to a string."
-              (if (symbolp x) (symbol-name x) x))
+               "Convert `X' to a string."
+               (if (symbolp x) (symbol-name x) x))
              (expand-p (s)
-              "Detemine if `S' needs to be evaluated, and if so, return the symbol to be evaluated."
-              (when (and (symbolp s)
-                         (->> s symbol-name (string-prefix-p "@")))
-                (-> s
-                    symbol-name
-                    (substring 1)
-                    intern)))
+               "Detemine if `S' needs to be evaluated, and if so, return the symbol to be evaluated."
+               (when (and (symbolp s)
+                          (->> s symbol-name (string-prefix-p "@")))
+                 (-> s
+                     symbol-name
+                     (substring 1)
+                     intern)))
              (expand-categories (categories)
-              "Expand any `categories' which need to be evaluated."
-              (cl-loop for category in categories
-                       for expand = (expand-p category)
-                       if expand append (eval expand)
-                       else collect category))
+               "Expand any `categories' which need to be evaluated."
+               (cl-loop for category in categories
+                        for expand = (expand-p category)
+                        if expand append (eval expand)
+                        else collect category))
              (define-agenda-icon (category icon-set icon-name &optional regex)
                "Define an agenda icon, for `category' with `icon-name' from `icon-set'."
                (let* ((icon-function (alist-get icon-set org-agenda-category-icons-iconset-alist))
