@@ -87,16 +87,25 @@
                                              category
                                            (concat (rx bos) category (rx eos))))
                       (entry (list category-selector (list icon) nil nil :ascent 'center)))
-                 (add-to-list 'org-agenda-category-icon-alist entry))))
-    (let ((icon-set))
-      (dolist (spec specs)
-        (cond
-         ((keywordp spec) (setf icon-set spec))
-         (t
-          (let ((icon-name (car spec))
-                (categories (cdr spec)))
-            (dolist (category (expand-categories categories))
-              (define-agenda-icon (to-string category) icon-set (to-string icon-name))))))))))
+                 `(add-to-list 'org-agenda-category-icon-alist ,entry))))
+    `(progn
+       ,@(cl-loop
+          with icon-set
+          for spec in specs
+          when (keywordp spec) do (setf icon-set spec)
+          for (icon-name . categories) = (unless (keywordp spec) spec)
+          for icon-name = (to-string icon-name)
+          append (cl-loop for category in (expand-categories categories)
+                          for (regex .  category) = (pcase category
+                                                      (`(^ . ,rest)
+                                                       (cons t (eval `(rx bos ,@rest))))
+                                                      (`($ . ,rest)
+                                                       (cons t  (eval `(rx ,@rest eos))))
+                                                      (`(rx . ,rest)
+                                                       (cons t (eval `(rx ,@rest))))
+                                                      (_
+                                                       (cons nil (to-string category))))
+                          collect (define-agenda-icon category icon-set icon-name regex))))))
 
 (provide 'org-agenda-category-icons)
 ;;; org-agenda-category-icons.el ends here
